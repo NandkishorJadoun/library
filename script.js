@@ -3,36 +3,46 @@ let myLibrary = [];
 const bookContainer = document.querySelector(".book-container")
 
 function Book(title, author, pages, read) {
-    // the constructor...
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+  // the constructor...
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
 }
 
 function addBookToLibrary(title, author, pages, read) {
-    // take params, create a book then store it in the array
-    const book = new Book(title, author, pages, read);
+  // take params, create a book then store it in the array
+  const book = new Book(title, author, pages, read);
 
-    myLibrary.push(book)
+  myLibrary.push(book)
 
 
-    function displayBook(array) {
-        bookContainer.innerHTML = "";
-        array.forEach((item) => {
-            const book = document.createElement("div")
-            book.setAttribute("class", "book")
-            bookContainer.appendChild(book)
+  function displayBook(array) {
+    bookContainer.innerHTML = "";
 
-            for (const key in item) {
-                const info = document.createElement("p")
-                book.appendChild(info)
+    array.forEach((item,index) => {
+      const book = document.createElement("div")
+      book.setAttribute("class", "book")
 
-                info.textContent = item[key]
-            }
-        });
-    }
-    displayBook(myLibrary)
+      for (const key in item) {
+        const info = document.createElement("p")
+        book.appendChild(info)
+        info.textContent = item[key]
+      }
+      
+      const removeBtn = document.createElement("button")
+      removeBtn.textContent = 'remove';
+      
+      removeBtn.addEventListener("click", ()=>{
+        myLibrary.splice(index, 1)
+        displayBook(myLibrary)
+      })
+      
+      book.appendChild(removeBtn);
+      bookContainer.appendChild(book)
+    });
+  }
+  displayBook(myLibrary)
 }
 
 
@@ -47,29 +57,29 @@ const readInp = document.querySelector("#read-input")
 
 
 dialogOpener.addEventListener("click", () => {
-    dialogBox.showModal()
+  dialogBox.showModal()
 })
 
 submitBtn.addEventListener("click", (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    if (!bookInp.value || !authorInp.value || !pageInp.value) {
-        alert("Please fill out!");
-        return;
-    }
+  if (!bookInp.value || !authorInp.value || !pageInp.value) {
+    alert("Please fill out!");
+    return;
+  }
 
-    readInp.value = readInp.checked ? "Yes" : "No"
+  readInp.value = readInp.checked ? "Yes" : "No"
 
-    const bookInfo = bookInp.value;
-    const authorInfo = authorInp.value;
-    const pageInfo = pageInp.value;
-    const readInfo = readInp.value;
+  const bookInfo = bookInp.value;
+  const authorInfo = authorInp.value;
+  const pageInfo = pageInp.value;
+  const readInfo = readInp.value;
 
-    bookInp.value = "";
-    authorInp.value = "";
-    pageInp.value = "";
-    
-    addBookToLibrary(bookInfo, authorInfo, pageInfo, readInfo)
+  bookInp.value = "";
+  authorInp.value = "";
+  pageInp.value = "";
 
-    dialogBox.close();
+  addBookToLibrary(bookInfo, authorInfo, pageInfo, readInfo)
+
+  dialogBox.close();
 })
