@@ -1,13 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library</title>
+    <title>Document</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
+
     
+    <button class="dialog-opener">Add book</button>
+    <dialog>
+        <form>
+            <p><label for="book-input">Book:
+                    <input type="text" name="book-input" id="book-input">
+                </label></p>
+
+            <p><label for="author-input">Author:
+                    <input type="text" name="author-input" id="author-input">
+                </label></p>
+
+            <p><label for="no-of-pages">Total Pages:
+                    <input type="number" name="no-of-pages" id="no-of-pages">
+                </label></p>
+
+            <p>
+                <label for="read-input">
+                    <input type="checkbox" name="read-input" id="read-input" value="Not yet">
+                    Read
+                </label>
+            </p>
+
+            <p>
+                <button formmethod="dialog">Close</button>
+                <button type="submit" id="submit-button">Submit</button>
+            </p>
+
+
+        </form>
+    </dialog>
+    <div class="book-container"></div>
 </body>
+
 </html>
