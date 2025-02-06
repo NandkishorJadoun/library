@@ -26,10 +26,11 @@ function addBookToLibrary(title, author, pages, read) {
     array.forEach((item, index) => {
       const book = document.createElement("div")
       book.setAttribute("class", "book")
+      book.style.backgroundColor = `hsl(${Math.floor(Math.random()*256)}, 100%, 85%)`
 
       for (const key in item) {
         if (item.hasOwnProperty(key)) {
-            const info = document.createElement("p");
+            const info = document.createElement("div");
             info.textContent = item[key];
             book.appendChild(info);
         }
@@ -44,7 +45,7 @@ function addBookToLibrary(title, author, pages, read) {
       })
 
       const removeBtn = document.createElement("button")
-      removeBtn.textContent = 'X';
+      removeBtn.textContent = 'Remove';
       
       removeBtn.addEventListener("click", () => {
         myLibrary.splice(index, 1)
@@ -77,10 +78,10 @@ dialogOpener.addEventListener("click", () => {
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
 
-  /*if (!bookInp.value || !authorInp.value || !pageInp.value) {
+  if (!bookInp.value || !authorInp.value || !pageInp.value) {
     alert("Please fill out!");
     return;
-  }*/
+  }
 
   readInp.value = readInp.checked ? "yes" : "no"
 
@@ -97,3 +98,6 @@ submitBtn.addEventListener("click", (event) => {
 
   dialogBox.close();
 })
+
+addBookToLibrary("Book 1", "Author 1", `${Math.floor(Math.random()*100)}`, "yes")
+addBookToLibrary("Book 2", "Author 2", `${Math.floor(Math.random()*100)}`, "no")
