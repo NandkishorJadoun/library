@@ -10,35 +10,49 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype.readStatusToggle = function(){
+  this.read = this.read === "yes" ? "no" : "yes";
+}
+
 function addBookToLibrary(title, author, pages, read) {
   // take params, create a book then store it in the array
   const book = new Book(title, author, pages, read);
 
   myLibrary.push(book)
 
-
   function displayBook(array) {
     bookContainer.innerHTML = "";
 
-    array.forEach((item,index) => {
+    array.forEach((item, index) => {
       const book = document.createElement("div")
       book.setAttribute("class", "book")
 
       for (const key in item) {
-        const info = document.createElement("p")
-        book.appendChild(info)
-        info.textContent = item[key]
-      }
-      
+        if (item.hasOwnProperty(key)) {
+            const info = document.createElement("p");
+            info.textContent = item[key];
+            book.appendChild(info);
+        }
+    }
+
+      const readStatusUpdate = document.createElement("button");
+      readStatusUpdate.textContent = item.read === "yes" ? "Mark as Unread" : "Mark as Read"
+
+      readStatusUpdate.addEventListener("click", ()=>{
+        item.readStatusToggle()
+        displayBook(myLibrary)
+      })
+
       const removeBtn = document.createElement("button")
-      removeBtn.textContent = 'remove';
+      removeBtn.textContent = 'X';
       
-      removeBtn.addEventListener("click", ()=>{
+      removeBtn.addEventListener("click", () => {
         myLibrary.splice(index, 1)
         displayBook(myLibrary)
       })
       
-      book.appendChild(removeBtn);
+      book.appendChild(readStatusUpdate)
+      book.appendChild(removeBtn)
       bookContainer.appendChild(book)
     });
   }
@@ -63,12 +77,12 @@ dialogOpener.addEventListener("click", () => {
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
 
-  if (!bookInp.value || !authorInp.value || !pageInp.value) {
+  /*if (!bookInp.value || !authorInp.value || !pageInp.value) {
     alert("Please fill out!");
     return;
-  }
+  }*/
 
-  readInp.value = readInp.checked ? "Yes" : "No"
+  readInp.value = readInp.checked ? "yes" : "no"
 
   const bookInfo = bookInp.value;
   const authorInfo = authorInp.value;
