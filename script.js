@@ -2,16 +2,17 @@ let myLibrary = [];
 
 const bookContainer = document.querySelector(".book-container")
 
-function Book(title, author, pages, read) {
-  // the constructor...
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 
-Book.prototype.readStatusToggle = function(){
-  this.read = this.read === "yes" ? "no" : "yes";
+  readStatusToggle() {
+    this.read = this.read === "yes" ? "no" : "yes";
+  }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -26,32 +27,30 @@ function addBookToLibrary(title, author, pages, read) {
     array.forEach((item, index) => {
       const book = document.createElement("div")
       book.setAttribute("class", "book")
-      book.style.backgroundColor = `hsl(${Math.floor(Math.random()*256)}, 100%, 85%)`
+      book.style.backgroundColor = `hsl(${Math.floor(Math.random() * 256)}, 100%, 85%)`
 
       for (const key in item) {
-        if (item.hasOwnProperty(key)) {
-            const info = document.createElement("div");
-            info.textContent = item[key];
-            book.appendChild(info);
-        }
-    }
+        const info = document.createElement("div");
+        info.textContent = item[key];
+        book.appendChild(info);
+      }
 
       const readStatusUpdate = document.createElement("button");
       readStatusUpdate.textContent = item.read === "yes" ? "Mark as Unread" : "Mark as Read"
 
-      readStatusUpdate.addEventListener("click", ()=>{
+      readStatusUpdate.addEventListener("click", () => {
         item.readStatusToggle()
         displayBook(myLibrary)
       })
 
       const removeBtn = document.createElement("button")
       removeBtn.textContent = 'Remove';
-      
+
       removeBtn.addEventListener("click", () => {
         myLibrary.splice(index, 1)
         displayBook(myLibrary)
       })
-      
+
       book.appendChild(readStatusUpdate)
       book.appendChild(removeBtn)
       bookContainer.appendChild(book)
@@ -99,5 +98,5 @@ submitBtn.addEventListener("click", (event) => {
   dialogBox.close();
 })
 
-addBookToLibrary("Book 1", "Author 1", `${Math.floor(Math.random()*100)}`, "yes")
-addBookToLibrary("Book 2", "Author 2", `${Math.floor(Math.random()*100)}`, "no")
+addBookToLibrary("Book 1", "Author 1", `${Math.floor(Math.random() * 100)}`, "yes")
+addBookToLibrary("Book 2", "Author 2", `${Math.floor(Math.random() * 100)}`, "no")
