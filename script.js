@@ -66,6 +66,8 @@ const dialogBox = document.querySelector("dialog");
 const dialogOpener = document.querySelector(".dialog-opener");
 const submitBtn = document.querySelector("#submit-button");
 
+const form = document.querySelector("form");
+const closeBtn = document.querySelector(".close")
 const bookInp = document.querySelector("#book-input");
 const authorInp = document.querySelector("#author-input");
 const pageInp = document.querySelector("#no-of-pages");
@@ -75,14 +77,38 @@ dialogOpener.addEventListener("click", () => {
   dialogBox.showModal();
 });
 
-submitBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  if (!bookInp.value || !authorInp.value || !pageInp.value) {
-    alert("Please fill out!");
-    return;
+bookInp.addEventListener("input", () => {
+  if (bookInp.validity.valueMissing) {
+    bookInp.setCustomValidity("Please Enter the Book Name");
+  } else {
+    bookInp.setCustomValidity("");
   }
+});
 
+authorInp.addEventListener("input", () => {
+  if (authorInp.validity.valueMissing) {
+    authorInp.setCustomValidity("Please Enter the Author Name");
+  } else {
+    authorInp.setCustomValidity("");
+  }
+});
+
+pageInp.addEventListener("input", () => {
+  if (pageInp.validity.valueMissing) {
+    pageInp.setCustomValidity("Please enter a Valid Page count");
+  } else if (pageInp.validity.rangeOverflow) {
+    pageInp.setCustomValidity(`Please enter number smaller than ${pageInp.max}
+    Currently it's ${pageInp.value}`);
+  } else if (pageInp.validity.rangeUnderflow) {
+    pageInp.setCustomValidity(`Please enter number greater than ${pageInp.min}
+    Currently it's ${pageInp.value}`);
+  } else {
+    pageInp.setCustomValidity("");
+  }
+});
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
   readInp.value = readInp.checked ? "yes" : "no";
 
   const bookInfo = bookInp.value;
@@ -98,6 +124,13 @@ submitBtn.addEventListener("click", (event) => {
 
   dialogBox.close();
 });
+
+
+closeBtn.addEventListener("click", (e)=> {
+  e.preventDefault()
+  dialogBox.close()
+})
+
 
 addBookToLibrary(
   "Book 1",
