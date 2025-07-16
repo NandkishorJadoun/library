@@ -2,57 +2,57 @@
 <html lang="en">
 
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
-    <header>
-        <div>Library</div>
-        <button class="dialog-opener">Add book</button>
-    </header>
+  <header>
+    <div>Library</div>
+    <button class="dialog-opener">Add book</button>
+  </header>
 
-    <dialog>
-        <form>
-            <p>
-                <label for="book-input">Book:</label>
-                <input type="text" name="book-input" id="book-input">
-            </p>
+  <dialog>
+    <form>
+      <p>
+        <label for="book-input">Book:</label>
+        <input type="text" name="book-input" id="book-input">
+      </p>
 
-            <p>
-                <label for="author-input">Author:</label>
-                <input type="text" name="author-input" id="author-input">
-            </p>
+      <p>
+        <label for="author-input">Author:</label>
+        <input type="text" name="author-input" id="author-input">
+      </p>
 
-            <p>
-                <label for="no-of-pages">Total Pages:</label>
-                <input type="number" name="no-of-pages" id="no-of-pages" min="0" max="5000">
-            </p>
+      <p>
+        <label for="no-of-pages">Total Pages:</label>
+        <input type="number" name="no-of-pages" id="no-of-pages" min="0" max="5000">
+      </p>
 
-            <p>
-                <label for="read-input">
-                    <input type="checkbox" name="read-input" id="read-input">
-                    Read
-                </label>
-            </p>
+      <p>
+        <label for="read-input">
+          <input type="checkbox" name="read-input" id="read-input">
+          Read
+        </label>
+      </p>
 
-            <p>
-                <button type="submit" id="submit-button">Submit</button>
-            </p>
+      <p>
+        <button type="submit" id="submit-button">Submit</button>
+      </p>
 
-            <p>
-                <button formmethod="dialog">Close</button>
-            </p>
+      <p>
+        <button formmethod="dialog">Close</button>
+      </p>
 
-        </form>
-    </dialog>
-    <div class="book-container"></div>
+    </form>
+  </dialog>
+  <div class="book-container"></div>
 </body>
 
 </html>

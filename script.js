@@ -1,6 +1,6 @@
 let myLibrary = [];
 
-const bookContainer = document.querySelector(".book-container")
+const bookContainer = document.querySelector(".book-container");
 
 class Book {
   constructor(title, author, pages, read) {
@@ -19,15 +19,17 @@ function addBookToLibrary(title, author, pages, read) {
   // take params, create a book then store it in the array
   const book = new Book(title, author, pages, read);
 
-  myLibrary.push(book)
+  myLibrary.push(book);
 
   function displayBook(array) {
     bookContainer.innerHTML = "";
 
     array.forEach((item, index) => {
-      const book = document.createElement("div")
-      book.setAttribute("class", "book")
-      book.style.backgroundColor = `hsl(${Math.floor(Math.random() * 256)}, 100%, 85%)`
+      const book = document.createElement("div");
+      book.setAttribute("class", "book");
+      book.style.backgroundColor = `hsl(${Math.floor(
+        Math.random() * 256
+      )}, 100%, 90%)`;
 
       for (const key in item) {
         const info = document.createElement("div");
@@ -36,43 +38,42 @@ function addBookToLibrary(title, author, pages, read) {
       }
 
       const readStatusUpdate = document.createElement("button");
-      readStatusUpdate.textContent = item.read === "yes" ? "Mark as Unread" : "Mark as Read"
+      readStatusUpdate.textContent =
+        item.read === "yes" ? "Mark as Unread" : "Mark as Read";
 
       readStatusUpdate.addEventListener("click", () => {
-        item.readStatusToggle()
-        displayBook(myLibrary)
-      })
+        item.readStatusToggle();
+        displayBook(myLibrary);
+      });
 
-      const removeBtn = document.createElement("button")
-      removeBtn.textContent = 'Remove';
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "Remove";
 
       removeBtn.addEventListener("click", () => {
-        myLibrary.splice(index, 1)
-        displayBook(myLibrary)
-      })
+        myLibrary.splice(index, 1);
+        displayBook(myLibrary);
+      });
 
-      book.appendChild(readStatusUpdate)
-      book.appendChild(removeBtn)
-      bookContainer.appendChild(book)
+      book.appendChild(readStatusUpdate);
+      book.appendChild(removeBtn);
+      bookContainer.appendChild(book);
     });
   }
-  displayBook(myLibrary)
+  displayBook(myLibrary);
 }
 
+const dialogBox = document.querySelector("dialog");
+const dialogOpener = document.querySelector(".dialog-opener");
+const submitBtn = document.querySelector("#submit-button");
 
-const dialogBox = document.querySelector("dialog")
-const dialogOpener = document.querySelector(".dialog-opener")
-const submitBtn = document.querySelector("#submit-button")
-
-const bookInp = document.querySelector("#book-input")
-const authorInp = document.querySelector("#author-input")
-const pageInp = document.querySelector("#no-of-pages")
-const readInp = document.querySelector("#read-input")
-
+const bookInp = document.querySelector("#book-input");
+const authorInp = document.querySelector("#author-input");
+const pageInp = document.querySelector("#no-of-pages");
+const readInp = document.querySelector("#read-input");
 
 dialogOpener.addEventListener("click", () => {
-  dialogBox.showModal()
-})
+  dialogBox.showModal();
+});
 
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
@@ -82,7 +83,7 @@ submitBtn.addEventListener("click", (event) => {
     return;
   }
 
-  readInp.value = readInp.checked ? "yes" : "no"
+  readInp.value = readInp.checked ? "yes" : "no";
 
   const bookInfo = bookInp.value;
   const authorInfo = authorInp.value;
@@ -93,10 +94,20 @@ submitBtn.addEventListener("click", (event) => {
   authorInp.value = "";
   pageInp.value = "";
 
-  addBookToLibrary(bookInfo, authorInfo, pageInfo, readInfo)
+  addBookToLibrary(bookInfo, authorInfo, pageInfo, readInfo);
 
   dialogBox.close();
-})
+});
 
-addBookToLibrary("Book 1", "Author 1", `${Math.floor(Math.random() * 100)}`, "yes")
-addBookToLibrary("Book 2", "Author 2", `${Math.floor(Math.random() * 100)}`, "no")
+addBookToLibrary(
+  "Book 1",
+  "Author 1",
+  `${Math.floor(Math.random() * 100)}`,
+  "yes"
+);
+addBookToLibrary(
+  "Book 2",
+  "Author 2",
+  `${Math.floor(Math.random() * 100)}`,
+  "no"
+);
